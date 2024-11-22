@@ -1,7 +1,12 @@
-$primaryColor: #4f46e5 !default;
-$primaryDarkColor: #4338ca !default;
-$primaryDarkerColor: #3730a3 !default;
+$primaryColor: #0aa7db !default;
+$primaryDarkColor: #0091ca !default;
+$primaryDarkerColor: #0174a3 !default;
 $primaryTextColor: #ffffff !default;
+
+$secondaryColor: #9b4cd6 !default;
+$secondaryDarkColor: #8336ba !default;
+$secondaryDarkerColor: darken($secondaryDarkColor, 10%) !default;
+$secondaryTextColor: #ffffff !default;
 
 $highlightBg: #eef2ff !default;
 $highlightTextColor: #312e81 !default;
@@ -60,7 +65,7 @@ $scaleSM: 0.875 !default;
 $scaleLG: 1.25 !default;
 
 //focus
-$focusOutlineColor: #6366f1 !default;
+$focusOutlineColor: $primaryColor !default;
 $focusOutline: 0 none !default;
 $focusOutlineOffset: 0 !default;
 $inputFocusOutlineOffset: $focusOutlineOffset !default;
@@ -78,7 +83,7 @@ $actionIconHoverColor: $shade900 !default;
 $actionIconBorderRadius: 50% !default;
 
 //input field (e.g. inputtext, spinner, inputmask)
-$inputPadding: 0.75rem 0.75rem !default;
+$inputPadding: 0.35rem 0.75rem !default;
 $inputTextFontSize: 1rem !default;
 $inputBg: $shade000 !default;
 $inputTextColor: $shade700 !default;
@@ -156,17 +161,17 @@ $plainButtonTextColor: $textSecondaryColor !default;
 $plainButtonHoverBgColor: $shade200 !default;
 $plainButtonActiveBgColor: $shade300 !default;
 
-$secondaryButtonBg: #64748b !default;
+$secondaryButtonBg: $secondaryColor !default;
 $secondaryButtonTextColor: #ffffff !default;
-$secondaryButtonBorder: 1px solid $secondaryButtonBg !default;
-$secondaryButtonHoverBg: #475569 !default;
+$secondaryButtonBorder: 1px solid $secondaryDarkColor !default;
+$secondaryButtonHoverBg: $secondaryDarkColor !default;
 $secondaryButtonTextHoverColor: $secondaryButtonTextColor !default;
-$secondaryButtonHoverBorderColor: #475569 !default;
-$secondaryButtonActiveBg: #475569 !default;
+$secondaryButtonHoverBorderColor: $secondaryDarkColor !default;
+$secondaryButtonActiveBg: $secondaryDarkColor !default;
 $secondaryButtonTextActiveColor: $secondaryButtonTextColor !default;
-$secondaryButtonActiveBorderColor: #475569 !default;
+$secondaryButtonActiveBorderColor: $secondaryDarkerColor !default;
 $secondaryButtonFocusShadow: 0 0 0 0.2rem
-  scale-color($secondaryButtonBg, $lightness: 60%) !default;
+  scale-color($secondaryDarkColor, $lightness: 60%) !default;
 
 $infoButtonBg: #3b82f6 !default;
 $infoButtonTextColor: #ffffff !default;
