@@ -1,0 +1,12 @@
+$sidebar-active-width: 280px;
+$sidebar-collapse-width: 80px;
+
+:host {
+  min-height: 100vh;
+  flex: 0 0 $sidebar-active-width;
+
+  aside {
+    height: 100%;
+    background-color: white;
+  }
+}

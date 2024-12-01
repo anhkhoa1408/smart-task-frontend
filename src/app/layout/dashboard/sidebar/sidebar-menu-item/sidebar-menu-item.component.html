@@ -1,0 +1,14 @@
+<div class="flex items-center px-6 menu-item group menu-item--active">
+  <div
+    class="flex items-center px-[16px] py-[12px] py grow rounded-[15px] gap-[16px] menu-item__inner"
+  >
+    <div
+      class="bg-white flex items-center justify-center w-[30px] h-[30px] rounded-[12px]"
+    >
+      <fa-icon [icon]="menuProps().icon" class="menu-item__icon"></fa-icon>
+    </div>
+    <p class="text-sm font-medium text-[#202224] group-active:text-[#2C2B31]">
+      {{ menuProps().title }}
+    </p>
+  </div>
+</div>
