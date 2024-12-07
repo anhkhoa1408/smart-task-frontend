@@ -1,1 +1,7 @@
-
+:host {
+  ::ng-deep {
+    section {
+      scroll-margin-top: 150px;
+    }
+  }
+}

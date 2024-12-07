@@ -19,4 +19,13 @@ export const routes: Routes = [
         (m) => m.dashboardRoutes
       ),
   },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'dashboard/home',
+  },
+  {
+    path: '*',
+    redirectTo: 'not-found',
+  },
 ];
