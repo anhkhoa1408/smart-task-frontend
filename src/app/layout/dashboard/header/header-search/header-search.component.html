@@ -1,1 +1,12 @@
-<p>header-search works!</p>
+<p-iconField iconPosition="left">
+  <p-inputIcon class="flex items-center">
+    <fa-icon [icon]="faSearch" class="text-[16px] text-primary-700"></fa-icon>
+  </p-inputIcon>
+  <input
+    type="text"
+    pInputText
+    [(ngModel)]="value"
+    class="placeholder:text-[#8E8E8E] bg-primary-50 rounded-full border-none"
+    placeholder="Search"
+  />
+</p-iconField>

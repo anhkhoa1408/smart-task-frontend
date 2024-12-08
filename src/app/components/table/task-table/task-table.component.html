@@ -1,0 +1,22 @@
+<div class="card">
+  <p-table [value]="tasks" [tableStyle]="{ 'min-width': '60rem' }">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Due date</th>
+        <th>Priority</th>
+        <th>Status</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-tasks>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary"></ng-template>
+  </p-table>
+</div>
