@@ -1,21 +1,54 @@
 <div class="flex h-screen items-center justify-center relative">
-  <div
+  <form
+    #signInForm="ngForm"
+    (ngSubmit)="onSubmit()"
     class="flex flex-col min-w-[400px] gap-6 px-6 py-10 bg-white shadow-main rounded-xl"
   >
     <h1 class="text-center text-2xl font-semibold">Welcome back!</h1>
     <div class="flex flex-col gap-2">
-      <label for="username">Username</label>
-      <input pInputText id="username" />
+      <label for="username">Email</label>
+      <input
+        name="email"
+        [(ngModel)]="userIdentificate.email"
+        required=""
+        email
+        pInputText
+        id="username"
+        #email="ngModel"
+      />
+      @if (email.touched && email.invalid) { @if (email.errors?.['required']) {
+      <p appInvalidText>Email is required</p>
+      } @else if (email.errors?.['email']) {
+      <p appInvalidText>Invalid email</p>
+      } }
     </div>
     <div class="flex flex-col gap-2">
       <label for="username">Password</label>
-      <input pInputText type="password" id="password" />
+      <input
+        name="password"
+        [(ngModel)]="userIdentificate.password"
+        required=""
+        pInputText
+        minlength="6"
+        type="password"
+        id="password"
+        #password="ngModel"
+      />
+      @if (password.touched && password.invalid) { @if
+      (password.errors?.['required']) {
+      <p appInvalidText>Password is required</p>
+      } @else if (password.errors?.['minlength']) {
+      <p appInvalidText>Password must have at least 6 characters long</p>
+      } }
     </div>
     <div class="p-fluid">
-      <p-button class="[&>button]:flex items-center justify-center"
+      <p-button
+        type="submit"
+        [disabled]="!signInForm.form.valid"
+        class="[&>button]:flex items-center justify-center"
         >Log In</p-button
       >
     </div>
-  </div>
+  </form>
   <img src="/background/wave.svg" class="absolute bottom-0 left-0 right-0" />
 </div>
