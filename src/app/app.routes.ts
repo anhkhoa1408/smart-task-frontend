@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -11,6 +12,14 @@ export const routes: Routes = [
       ),
   },
   {
+    title: 'Sign up',
+    path: 'auth/sign-up',
+    loadComponent: () =>
+      import('./pages/auth/sign-up/sign-up.component').then(
+        (m) => m.SignUpComponent
+      ),
+  },
+  {
     title: 'Smart Task',
     path: 'dashboard',
     component: DashboardComponent,
@@ -18,6 +27,7 @@ export const routes: Routes = [
       import('./pages/dashboard/dashboard.routes').then(
         (m) => m.dashboardRoutes
       ),
+    canActivate: [authGuard],
   },
   {
     path: '',
