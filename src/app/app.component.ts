@@ -7,8 +7,8 @@ import { PrimeNGConfig } from 'primeng/api';
   selector: 'app-root',
   standalone: true,
   imports: [FontAwesomeModule, RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './../assets/styles/index.scss',
+  template: '<router-outlet></router-outlet>',
+  styles: [],
 })
 export class AppComponent {
   title = 'smart-task-frontend';

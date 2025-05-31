@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { SidebarComponent } from '../../layout/dashboard/sidebar/sidebar.component';
-import { HeaderDataService } from '../../layout/dashboard/header/services/header-data.service';
+import { HeaderDataService } from '../../molecules/header/services/header-data.service';
+import { SidebarComponent } from '../../molecules/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-dashboard',

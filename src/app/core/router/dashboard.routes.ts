@@ -5,7 +5,9 @@ export const dashboardRoutes: Routes = [
     title: 'Home',
     path: 'home',
     loadComponent: () =>
-      import('./home/home.component').then((m) => m.HomeComponent),
+      import('../../core/pages/home/home.component').then(
+        (m) => m.HomeComponent
+      ),
   },
   {
     path: '',
