@@ -3,9 +3,9 @@ import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule, NgModel } from '@angular/forms';
-import { InvalidTextDirective } from '../../../directives/invalid-text.directive';
-import { AuthApiService } from '../../../../api/services/auth-api.service';
-import { SignUp } from '../../../../../types/auth.type';
+import { InvalidTextDirective } from '../../../core/directives/invalid-text.directive';
+import { AuthApiService } from '../../../api/services/auth-api.service';
+import { SignUp } from '../../../../types/auth.type';
 
 @Component({
   selector: 'app-sign-up',
