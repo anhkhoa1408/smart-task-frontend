@@ -4,11 +4,10 @@ import { SidebarComponent } from '../../layout/dashboard/sidebar/sidebar.compone
 import { HeaderDataService } from '../../layout/dashboard/header/services/header-data.service';
 
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
-  providers: [HeaderDataService],
-  imports: [RouterOutlet, SidebarComponent],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss',
+    selector: 'app-dashboard',
+    providers: [HeaderDataService],
+    imports: [RouterOutlet, SidebarComponent],
+    templateUrl: './dashboard.component.html',
+    styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {}

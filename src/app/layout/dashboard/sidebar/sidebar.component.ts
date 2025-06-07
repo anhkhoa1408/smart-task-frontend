@@ -3,10 +3,9 @@ import { SidebarHeaderComponent } from './sidebar-header/sidebar-header.componen
 import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
 
 @Component({
-  selector: 'app-sidebar',
-  standalone: true,
-  imports: [SidebarHeaderComponent, SidebarMenuComponent],
-  templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss',
+    selector: 'app-sidebar',
+    imports: [SidebarHeaderComponent, SidebarMenuComponent],
+    templateUrl: './sidebar.component.html',
+    styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {}

@@ -5,7 +5,6 @@ import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [FontAwesomeModule, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './../assets/styles/index.scss',

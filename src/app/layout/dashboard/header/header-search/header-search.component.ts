@@ -7,17 +7,16 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
-  selector: 'app-header-search',
-  standalone: true,
-  imports: [
-    FormsModule,
-    IconFieldModule,
-    InputIconModule,
-    InputTextModule,
-    FontAwesomeModule,
-  ],
-  templateUrl: './header-search.component.html',
-  styleUrl: './header-search.component.scss',
+    selector: 'app-header-search',
+    imports: [
+        FormsModule,
+        IconFieldModule,
+        InputIconModule,
+        InputTextModule,
+        FontAwesomeModule,
+    ],
+    templateUrl: './header-search.component.html',
+    styleUrl: './header-search.component.scss'
 })
 export class HeaderSearchComponent {
   faSearch = faSearch;

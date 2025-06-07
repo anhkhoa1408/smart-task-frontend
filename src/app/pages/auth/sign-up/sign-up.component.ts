@@ -8,18 +8,17 @@ import { AuthApiService } from '../../../api/services/auth-api.service';
 import { SignUp } from '../../../../types/auth.type';
 
 @Component({
-  selector: 'app-sign-up',
-  standalone: true,
-  imports: [
-    ButtonModule,
-    CardModule,
-    FormsModule,
-    InputTextModule,
-    InvalidTextDirective,
-  ],
-  providers: [AuthApiService],
-  templateUrl: './sign-up.component.html',
-  styleUrl: './sign-up.component.scss',
+    selector: 'app-sign-up',
+    imports: [
+        ButtonModule,
+        CardModule,
+        FormsModule,
+        InputTextModule,
+        InvalidTextDirective,
+    ],
+    providers: [AuthApiService],
+    templateUrl: './sign-up.component.html',
+    styleUrl: './sign-up.component.scss'
 })
 export class SignUpComponent {
   @ViewChild('confirmPassword', {

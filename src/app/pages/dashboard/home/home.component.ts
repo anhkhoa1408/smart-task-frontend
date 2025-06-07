@@ -4,11 +4,10 @@ import { HeaderDataService } from '../../../layout/dashboard/header/services/hea
 import { TaskTableComponent } from '../../../core/organisms/task-table/task-table.component';
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [HeaderComponent, TaskTableComponent],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
+    selector: 'app-home',
+    imports: [HeaderComponent, TaskTableComponent],
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.scss'
 })
 export class HomeComponent {
   constructor(private readonly headerDataService: HeaderDataService) {

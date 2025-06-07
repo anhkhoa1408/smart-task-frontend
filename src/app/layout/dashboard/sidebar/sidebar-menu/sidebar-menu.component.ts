@@ -5,11 +5,10 @@ import { SidebarMenuItem } from '../../../../../types/sidebar.type';
 import { SidebarMenuItemComponent } from '../sidebar-menu-item/sidebar-menu-item.component';
 
 @Component({
-  selector: 'app-sidebar-menu',
-  standalone: true,
-  imports: [FontAwesomeModule, SidebarMenuItemComponent],
-  templateUrl: './sidebar-menu.component.html',
-  styleUrl: './sidebar-menu.component.scss',
+    selector: 'app-sidebar-menu',
+    imports: [FontAwesomeModule, SidebarMenuItemComponent],
+    templateUrl: './sidebar-menu.component.html',
+    styleUrl: './sidebar-menu.component.scss'
 })
 export class SidebarMenuComponent {
   sidebarMenuItems: SidebarMenuItem[] = [
