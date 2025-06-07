@@ -7,6 +7,4 @@ import { Directive } from '@angular/core';
     class: 'text-sm text-red-500',
   },
 })
-export class InvalidTextDirective {
-  constructor() {}
-}
+export class InvalidTextDirective {}

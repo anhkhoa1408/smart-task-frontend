@@ -40,12 +40,7 @@
       } }
     </div>
     <div class="p-fluid">
-      <p-button
-        type="submit"
-        [disabled]="!signInForm.form.valid"
-        class="[&>button]:flex items-center justify-center"
-        >Log In</p-button
-      >
+      <app-button-flat label="Sign in" (clickEmitter)="onSubmit()" />
     </div>
   </form>
   <img src="/background/wave.svg" class="absolute bottom-0 left-0 right-0" />

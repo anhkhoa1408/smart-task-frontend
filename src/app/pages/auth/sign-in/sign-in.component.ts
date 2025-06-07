@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { InvalidTextDirective } from '../../../core/directives/invalid-text.directive';
 import { AuthApiService } from '../../../api/services/auth-api.service';
 import { SignIn } from '../../../../types/auth.type';
+import { ButtonFlatComponent } from '../../../atoms/button-flat/button-flat.component';
 
 @Component({
   selector: 'app-sign-in',
@@ -15,6 +16,7 @@ import { SignIn } from '../../../../types/auth.type';
     FormsModule,
     InputTextModule,
     InvalidTextDirective,
+    ButtonFlatComponent,
   ],
   providers: [AuthApiService],
   templateUrl: './sign-in.component.html',

@@ -8,6 +8,7 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import Aura from '@primeng/themes/aura';
+import AppPreset from './providers/AppPreset';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,9 +17,11 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptorsFromDi()),
     provideAnimationsAsync(),
     providePrimeNG({
+      ripple: true,
       theme: {
-        preset: Aura,
+        preset: AppPreset,
         options: {
+          darkModeSelector: '.fake-dark-selector',
           cssLayer: {
             name: 'primeng',
             order: 'theme, base, primeng',
