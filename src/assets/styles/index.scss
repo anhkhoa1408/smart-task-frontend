@@ -1,4 +1,4 @@
-@import "./libs/base";
+@use "./libs/base" as *;
 
 * {
   font-family: "Poppins", sans-serif;

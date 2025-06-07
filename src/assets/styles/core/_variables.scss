@@ -1,0 +1,7 @@
+$primary-color: #0aa7db;
+$secondary-color: #9b4cd6;
+
+:root {
+  --primary-color: #{$primary-color};
+  --secondary-color: #{$secondary-color};
+}

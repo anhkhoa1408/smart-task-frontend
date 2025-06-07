@@ -8,17 +8,17 @@ import { AuthApiService } from '../../../api/services/auth-api.service';
 import { SignIn } from '../../../../types/auth.type';
 
 @Component({
-    selector: 'app-sign-in',
-    imports: [
-        ButtonModule,
-        CardModule,
-        FormsModule,
-        InputTextModule,
-        InvalidTextDirective,
-    ],
-    providers: [AuthApiService],
-    templateUrl: './sign-in.component.html',
-    styleUrl: './sign-in.component.scss'
+  selector: 'app-sign-in',
+  imports: [
+    ButtonModule,
+    CardModule,
+    FormsModule,
+    InputTextModule,
+    InvalidTextDirective,
+  ],
+  providers: [AuthApiService],
+  templateUrl: './sign-in.component.html',
+  styleUrl: './sign-in.component.scss',
 })
 export class SignInComponent {
   authApiService = inject(AuthApiService);
