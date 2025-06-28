@@ -18,7 +18,7 @@ export enum EButtonType {
   imports: [ButtonModule],
   template: `<p-button
     [label]="label()"
-    (onclick)="onClick()"
+    (onClick)="onClick()"
     [styleClass]="getStyleClass()"
   />`,
   styles: ``,

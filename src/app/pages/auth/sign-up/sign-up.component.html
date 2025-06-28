@@ -1,86 +1,26 @@
 <div class="flex h-screen items-center justify-center relative">
   <form
-    #signUpForm="ngForm"
-    (ngSubmit)="onSubmit()"
+    [formGroup]="formGroup"
     class="flex flex-col min-w-[400px] gap-6 px-6 py-10 bg-white shadow-main rounded-xl"
   >
     <h1 class="text-center text-2xl font-semibold">Register new account</h1>
-    <div class="flex flex-col gap-2">
-      <label>Name</label>
-      <input
-        name="name"
-        [(ngModel)]="signUpBody.name"
-        required
-        pInputText
-        #name="ngModel"
-      />
-      @if (name.touched && name.invalid) { @if (name.errors?.['required']) {
-      <p appInvalidText>Name is required</p>
-      } }
-    </div>
-    <div class="flex flex-col gap-2">
-      <label>Email</label>
-      <input
-        name="email"
-        [(ngModel)]="signUpBody.email"
-        required
-        email
-        pInputText
-        #email="ngModel"
-      />
-      @if (email.touched && email.invalid) { @if (email.errors?.['required']) {
-      <p appInvalidText>Email is required</p>
-      } @else if (email.errors?.['email']) {
-      <p appInvalidText>Invalid email</p>
-      } }
-    </div>
-    <div class="flex flex-col gap-2">
-      <label>Password</label>
-      <input
-        name="password"
-        [(ngModel)]="signUpBody.password"
-        required
-        pInputText
-        minlength="6"
-        type="password"
-        #password="ngModel"
-      />
-      @if (password.touched && password.invalid) { @if
-      (password.errors?.['required']) {
-      <p appInvalidText>Password is required</p>
-      } @else if (password.errors?.['minlength']) {
-      <p appInvalidText>Password must have at least 6 characters long</p>
-      } }
-    </div>
-    <div class="flex flex-col gap-2">
-      <label>Confirm password</label>
-      <input
-        name="confirmPassword"
-        [(ngModel)]="signUpBody.confirmPassword"
-        required
-        pInputText
-        minlength="6"
-        type="password"
-        #confirmPassword="ngModel"
-      />
-      @if (confirmPassword.touched && confirmPassword.invalid) { @if
-      (confirmPassword.errors?.['required']) {
-      <p appInvalidText>Confirm password is required</p>
-      } @else if (confirmPassword.errors?.['minlength']) {
-      <p appInvalidText>
-        Confirm password must have at least 6 characters long
-      </p>
-      } @else if (confirmPassword.value !== password.value) {
-      <p appInvalidText>Password do not match</p>
-      } }
-    </div>
+    <app-input [label]="'Name'" [required]="true" formControlName="name" />
+    <app-input [label]="'Email'" [required]="true" formControlName="email" />
+    <app-input
+      [label]="'Password'"
+      [required]="true"
+      type="password"
+      formControlName="password"
+    />
+    <app-input
+      [label]="'Confirm password'"
+      [required]="true"
+      formControlName="confirmPassword"
+      type="password"
+    />
     <div class="p-fluid">
-      <p-button
-        type="submit"
-        class="[&>button]:flex items-center justify-center"
-        >Log In</p-button
-      >
+      <app-button-flat [label]="'Submit'" (clickEmitter)="onSubmit()" />
     </div>
   </form>
-  <img src="/background/wave.svg" class="absolute bottom-0 left-0 right-0" />
+  <!-- <img src="/background/wave.svg" class="absolute bottom-0 left-0 right-0" /> -->
 </div>

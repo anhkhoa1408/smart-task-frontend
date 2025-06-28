@@ -1,11 +1,17 @@
-import { Component, ElementRef, inject, ViewChild } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import {
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
-import { FormsModule, NgModel } from '@angular/forms';
-import { InvalidTextDirective } from '../../../core/directives/invalid-text.directive';
 import { AuthApiService } from '../../../api/services/auth-api.service';
-import { SignUp } from '../../../../types/auth.type';
+import { ButtonFlatComponent } from '../../../atoms/button-flat/button-flat.component';
+import { InputComponent } from '../../../atoms/input/input.component';
+import { passwordMatchingValidator } from './_validators/password-matching.validator';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,28 +20,35 @@ import { SignUp } from '../../../../types/auth.type';
     CardModule,
     FormsModule,
     InputTextModule,
-    InvalidTextDirective,
+    InputComponent,
+    ReactiveFormsModule,
+    ButtonFlatComponent,
   ],
   providers: [AuthApiService],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss',
 })
 export class SignUpComponent {
-  @ViewChild('confirmPassword', {
-    read: NgModel,
-  })
-  confirmPassword!: NgModel;
-  authApiService = inject(AuthApiService);
+  private readonly FormBuilder = inject(FormBuilder);
 
-  signUpBody: SignUp = {
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-  };
+  public formGroup = this.FormBuilder.group(
+    {
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
+    },
+    {
+      validators: passwordMatchingValidator,
+    }
+  );
 
-  onSubmit = () => {
-    console.log(this.confirmPassword.value);
-    // return this.authApiService.signUp(this.signUpBody).subscribe(console.log);
-  };
+  public onSubmit(): void {
+    if (this.formGroup.invalid) {
+      this.formGroup.markAllAsTouched();
+      return;
+    }
+
+    console.log(this.formGroup.value);
+  }
 }

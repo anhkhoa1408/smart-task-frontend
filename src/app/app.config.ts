@@ -9,6 +9,7 @@ import {
 } from '@angular/common/http';
 import Aura from '@primeng/themes/aura';
 import AppPreset from './providers/AppPreset';
+import { ValidationMessageService } from './core/services/validation-message.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -29,5 +30,6 @@ export const appConfig: ApplicationConfig = {
         },
       },
     }),
+    ValidationMessageService,
   ],
 };
