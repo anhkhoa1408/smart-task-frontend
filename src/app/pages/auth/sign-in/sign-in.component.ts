@@ -5,6 +5,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { AuthApiService } from '../../../api/services/auth-api.service';
@@ -13,6 +14,7 @@ import {
   EButtonMode,
 } from '../../../atoms/button-flat/button-flat.component';
 import { InputComponent } from '../../../atoms/input/input.component';
+import { AppRoutingConstant } from '../../../core/constants/app-routing.constants';
 
 @Component({
   selector: 'app-sign-in',
@@ -32,6 +34,7 @@ import { InputComponent } from '../../../atoms/input/input.component';
 })
 export class SignInComponent {
   private readonly formBuilder = inject(FormBuilder);
+  private readonly router = inject(Router);
 
   public readonly EButtonMode = EButtonMode;
 
@@ -45,9 +48,10 @@ export class SignInComponent {
   });
 
   public onSubmit(): void {
-    if (this.formGroup.invalid) {
-      this.formGroup.markAllAsTouched();
-      return;
-    }
+    this.router.navigateByUrl(AppRoutingConstant.DASHBOARD_PROJECT);
+    // if (this.formGroup.invalid) {
+    //   this.formGroup.markAllAsTouched();
+    //   return;
+    // }
   }
 }

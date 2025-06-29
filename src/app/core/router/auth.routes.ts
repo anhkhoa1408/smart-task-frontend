@@ -1,14 +1,16 @@
 import { Route } from '@angular/router';
+import { AppRoutingConstant } from '../constants/app-routing.constants';
 
 export const authRoutes: Route[] = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'sign-in',
+    redirectTo: AppRoutingConstant.SIGN_IN,
   },
+
   {
     title: 'Sign in',
-    path: 'sign-in',
+    path: AppRoutingConstant.SIGN_IN,
     loadComponent: () =>
       import('./../../pages/auth/sign-in/sign-in.component').then(
         (m) => m.SignInComponent
@@ -16,7 +18,7 @@ export const authRoutes: Route[] = [
   },
   {
     title: 'Sign up',
-    path: 'sign-up',
+    path: AppRoutingConstant.SIGN_UP,
     loadComponent: () =>
       import('./../../pages/auth/sign-up/sign-up.component').then(
         (m) => m.SignUpComponent

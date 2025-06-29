@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
 import { DashboardComponent } from './templates/dashboard/dashboard.component';
+import { AppRoutingConstant } from './core/constants/app-routing.constants';
+import { AuthComponent } from './templates/auth/auth.component';
 
 export const routes: Routes = [
   {
@@ -9,13 +11,14 @@ export const routes: Routes = [
     redirectTo: 'auth',
   },
   {
-    path: 'auth',
+    path: AppRoutingConstant.AUTH,
+    component: AuthComponent,
     loadChildren: () =>
       import('./core/router/auth.routes').then((m) => m.authRoutes),
   },
   {
     title: 'Smart Task',
-    path: 'dashboard',
+    path: AppRoutingConstant.DASHBOARD,
     component: DashboardComponent,
     loadChildren: () =>
       import('./core/router/dashboard.routes').then((m) => m.dashboardRoutes),
@@ -23,6 +26,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'not-found',
+    redirectTo: AppRoutingConstant.NOT_FOUND,
   },
 ];
