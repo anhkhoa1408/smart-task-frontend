@@ -1,10 +1,9 @@
 <div class="flex h-screen items-center justify-center relative">
   <form
     [formGroup]="formGroup"
-    class="flex flex-col min-w-[400px] gap-6 px-6 py-10 bg-white shadow-main rounded-xl"
+    class="flex flex-col min-w-[400px] gap-6 px-6 py-10 bg-white shadow-lg rounded-xl"
   >
     <h1 class="text-center text-2xl font-semibold">Register new account</h1>
-    <app-input [label]="'Name'" [required]="true" formControlName="name" />
     <app-input [label]="'Email'" [required]="true" formControlName="email" />
     <app-input
       [label]="'Password'"
@@ -19,8 +18,15 @@
       type="password"
     />
     <div class="p-fluid">
-      <app-button-flat [label]="'Submit'" (clickEmitter)="onSubmit()" />
+      <app-button-flat
+        label="Submit"
+        [mode]="EButtonMode.FULL"
+        (clickEmitter)="onSubmit()"
+      />
     </div>
   </form>
-  <!-- <img src="/background/wave.svg" class="absolute bottom-0 left-0 right-0" /> -->
+  <img
+    src="/background/wave.svg"
+    class="absolute bottom-0 left-0 right-0 -z-10"
+  />
 </div>

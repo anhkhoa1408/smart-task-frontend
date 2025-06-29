@@ -3,13 +3,13 @@ import { ValidationErrors } from '@angular/forms';
 
 @Injectable()
 export class ValidationMessageService {
-  public getErrorMessages(errors?: ValidationErrors | null): string {
+  public getErrorMessages(errors?: ValidationErrors | null): string[] {
     if (!errors) {
-      return '';
+      return [];
     }
-    return Object.keys(errors)
-      .map((key) => this.getErrorMessage(key, errors[key]))
-      .join('\n');
+    return Object.keys(errors).map((key) =>
+      this.getErrorMessage(key, errors[key])
+    );
   }
 
   private getErrorMessage(key: string, value: any): string {

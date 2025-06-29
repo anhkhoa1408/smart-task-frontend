@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormsModule,
@@ -7,18 +7,21 @@ import {
 } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
-import { InputTextModule } from 'primeng/inputtext';
 import { AuthApiService } from '../../../api/services/auth-api.service';
-import { ButtonFlatComponent } from '../../../atoms/button-flat/button-flat.component';
+import {
+  ButtonFlatComponent,
+  EButtonMode,
+} from '../../../atoms/button-flat/button-flat.component';
 import { InputComponent } from '../../../atoms/input/input.component';
 
 @Component({
   selector: 'app-sign-in',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
   imports: [
     ButtonModule,
     CardModule,
     FormsModule,
-    InputTextModule,
     ButtonFlatComponent,
     ReactiveFormsModule,
     InputComponent,
@@ -29,6 +32,8 @@ import { InputComponent } from '../../../atoms/input/input.component';
 })
 export class SignInComponent {
   private readonly formBuilder = inject(FormBuilder);
+
+  public readonly EButtonMode = EButtonMode;
 
   public formGroup = this.formBuilder.group({
     email: this.formBuilder.control('', {
@@ -44,7 +49,5 @@ export class SignInComponent {
       this.formGroup.markAllAsTouched();
       return;
     }
-
-    console.log(this.formGroup.value);
   }
 }

@@ -1,10 +1,11 @@
-import { FormGroup, ValidationErrors } from '@angular/forms';
+import { FormControl, FormGroup, ValidationErrors } from '@angular/forms';
 
 export const passwordMatchingValidator = (
-  formGroup: FormGroup
+  formControl: FormControl
 ): ValidationErrors | null => {
-  const password = formGroup.get('password');
-  const confirmPassword = formGroup.get('confirmPassword');
+  console.log(formControl);
+  const password = formControl.parent?.get('password');
+  const confirmPassword = formControl?.parent?.get('confirmPassword');
 
   if (!password || !confirmPassword) {
     return null;

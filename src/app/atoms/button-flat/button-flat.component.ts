@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -5,27 +6,42 @@ import {
   output,
 } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
 
 export enum EButtonType {
   PRIMARY = 'primary',
   SECONDARY = 'secondary',
 }
 
+export enum EButtonMode {
+  NORMAL = 'normal',
+  FULL = 'full',
+}
+
 @Component({
   selector: 'app-button-flat',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ButtonModule],
-  template: `<p-button
+  imports: [ButtonModule, RippleModule, NgClass],
+  template: `<button
+    pButton
+    pRipple
     [label]="label()"
-    (onClick)="onClick()"
-    [styleClass]="getStyleClass()"
-  />`,
+    (click)="onClick()"
+    [class]="getStyleClass()"
+    [ngClass]="{
+      'w-full': mode() === EButtonMode.FULL,
+      'w-fit': mode() === EButtonMode.NORMAL
+    }"
+  ></button>`,
   styles: ``,
 })
 export class ButtonFlatComponent {
   public label = input.required<string>();
   public type = input<EButtonType>(EButtonType.PRIMARY);
+  public mode = input<EButtonMode>(EButtonMode.NORMAL);
+
+  public readonly EButtonMode = EButtonMode;
 
   public clickEmitter = output();
 

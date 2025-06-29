@@ -1,6 +1,8 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
+  DoCheck,
   ElementRef,
   forwardRef,
   inject,
@@ -16,12 +18,13 @@ import {
 } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { ValidationMessageService } from '../../core/services/validation-message.service';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-input',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [InputTextModule],
+  imports: [InputTextModule, NgClass],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -31,10 +34,11 @@ import { ValidationMessageService } from '../../core/services/validation-message
   ],
   template: `
     <section class="input__section flex flex-col gap-2">
-      <label [class.required]="required()">{{ label() }}</label>
+      <label class="text-sm" [class.required]="required()">{{ label() }}</label>
       <input
         pInputText
         [type]="type()"
+        [placeholder]="placeholder()"
         [attr.minLength]="minLength()"
         [attr.maxLength]="maxLength()"
         [attr.pattern]="pattern()"
@@ -42,14 +46,22 @@ import { ValidationMessageService } from '../../core/services/validation-message
         [attr.max]="max()"
         (input)="onInput($event)"
         (blur)="onBlur()"
-        [class.error]="control.invalid && control.touched"
+        [ngClass]="{
+          'ng-invalid ng-dirty border-red-500': isInvalid(),
+        }"
         #inputRef
       />
 
-      @if (control.invalid && control.touched) {
-      <p class="text-red-500 text-sm">
-        {{ validationMessageService.getErrorMessages(control.errors) }}
-      </p>
+      @if (isInvalid()) {
+      <div class="flex flex-col gap-1">
+        @for (error of
+        validationMessageService.getErrorMessages(control.errors); track error)
+        {
+        <p class="text-red-500 text-xs">
+          {{ error }}
+        </p>
+        }
+      </div>
       }
     </section>
   `,
@@ -61,9 +73,11 @@ import { ValidationMessageService } from '../../core/services/validation-message
         .input__section {
           input {
             width: 100%;
+            font-size: var(--text-sm);
 
-            &.error {
-              border: 1px solid var(--color-red-500);
+            &::placeholder {
+              font-size: var(--text-xs);
+              color: var(--color-gray-300);
             }
           }
 
@@ -83,11 +97,12 @@ import { ValidationMessageService } from '../../core/services/validation-message
     `,
   ],
 })
-export class InputComponent implements ControlValueAccessor {
+export class InputComponent implements ControlValueAccessor, DoCheck {
   private inputRef = viewChild<ElementRef<HTMLInputElement>>('inputRef');
 
   public type = input<HTMLInputElement['type']>('text');
   public label = input('');
+  public placeholder = input<string>('');
   public required = input(false);
   public minLength = input<number | null>(null);
   public maxLength = input<number | null>(null);
@@ -96,8 +111,10 @@ export class InputComponent implements ControlValueAccessor {
   public pattern = input<string | RegExp | null>(null);
 
   public readonly validationMessageService = inject(ValidationMessageService);
+
   private readonly renderer = inject(Renderer2);
   private readonly injector = inject(Injector);
+  private readonly cdr = inject(ChangeDetectorRef);
 
   private onChange: (value: string) => void = () => {};
 
@@ -107,19 +124,23 @@ export class InputComponent implements ControlValueAccessor {
     return this.injector.get(NgControl);
   }
 
-  writeValue(value: string): void {
+  public isInvalid(): boolean {
+    return !!(this.control.invalid && this.control.touched);
+  }
+
+  public writeValue(value: string): void {
     this.renderer.setProperty(this.inputRef()?.nativeElement, 'value', value);
   }
 
-  registerOnChange(fn: (value: string) => void): void {
+  public registerOnChange(fn: (value: string) => void): void {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: () => void): void {
+  public registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void {
+  public setDisabledState(isDisabled: boolean): void {
     this.renderer.setProperty(
       this.inputRef()?.nativeElement,
       'disabled',
@@ -127,13 +148,19 @@ export class InputComponent implements ControlValueAccessor {
     );
   }
 
-  onInput(event: Event): void {
+  public onInput(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.onChange(input.value);
     this.onTouched();
   }
 
-  onBlur(): void {
+  public onBlur(): void {
     this.onTouched();
+  }
+
+  public ngDoCheck(): void {
+    if (this.control.invalid) {
+      this.cdr.markForCheck();
+    }
   }
 }
