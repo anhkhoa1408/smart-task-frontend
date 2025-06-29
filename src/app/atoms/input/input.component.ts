@@ -31,6 +31,7 @@ import { NgClass } from '@angular/common';
       useExisting: forwardRef(() => InputComponent),
       multi: true,
     },
+    ValidationMessageService,
   ],
   template: `
     <section class="input__section flex flex-col gap-2">

@@ -1,6 +1,15 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {
+  FaIconLibrary,
+  FontAwesomeModule,
+} from '@fortawesome/angular-fontawesome';
+import {
+  faChevronDown,
+  faHouse,
+  faList,
+  faListCheck,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +18,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   styleUrl: './../assets/styles/index.scss',
 })
 export class AppComponent {
-  title = 'smart-task-frontend';
+  public title = 'smart-task-frontend';
+
+  constructor(library: FaIconLibrary) {
+    library.addIcons(faHouse, faListCheck, faList, faChevronDown);
+  }
 }
