@@ -3,7 +3,6 @@ import { FormControl, FormGroup, ValidationErrors } from '@angular/forms';
 export const passwordMatchingValidator = (
   formControl: FormControl
 ): ValidationErrors | null => {
-  console.log(formControl);
   const password = formControl.parent?.get('password');
   const confirmPassword = formControl?.parent?.get('confirmPassword');
 

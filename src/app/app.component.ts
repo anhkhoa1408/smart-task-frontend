@@ -10,12 +10,16 @@ import {
   faList,
   faListCheck,
 } from '@fortawesome/free-solid-svg-icons';
+import { Toast } from 'primeng/toast';
 
 @Component({
   selector: 'app-root',
-  imports: [FontAwesomeModule, RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './../assets/styles/index.scss',
+  imports: [FontAwesomeModule, RouterOutlet, Toast],
+  standalone: true,
+  template: `
+    <p-toast />
+    <router-outlet></router-outlet>
+  `,
 })
 export class AppComponent {
   public title = 'smart-task-frontend';
