@@ -9,7 +9,7 @@ import {
 import { LocalStorageConstant } from '../../../core/constants/local-storage.constants';
 import { LocalStorageService } from '../../../core/services/local-storage.service';
 
-interface AuthState {
+export interface AuthState {
   accessToken: string;
   name: string;
   email: string;

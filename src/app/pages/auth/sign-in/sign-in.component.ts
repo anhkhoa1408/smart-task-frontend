@@ -1,13 +1,21 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   FormBuilder,
   FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
+import { finalize } from 'rxjs';
 import { AuthApiService } from '../../../api/services/auth-api.service';
 import {
   ButtonFlatComponent,
@@ -15,8 +23,8 @@ import {
 } from '../../../atoms/button-flat/button-flat.component';
 import { InputComponent } from '../../../atoms/input/input.component';
 import { AppRoutingConstant } from '../../../core/constants/app-routing.constants';
-import { catchError, throwError } from 'rxjs';
-import { MessageService } from 'primeng/api';
+import { QueryParamsConstant } from '../../../core/constants/query-params.constants';
+import { LoadingService } from '../../../core/services/loading.service';
 import { AuthStore } from '../_store/auth.store';
 
 @Component({
@@ -60,11 +68,14 @@ import { AuthStore } from '../_store/auth.store';
   `,
 })
 export class SignInComponent {
+  private readonly loadingService = inject(LoadingService);
   private readonly formBuilder = inject(FormBuilder);
   private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
   private readonly authApiService = inject(AuthApiService);
   private readonly messageService = inject(MessageService);
   private readonly authStore = inject(AuthStore);
+  private readonly destroyRef = inject(DestroyRef);
 
   public readonly EButtonMode = EButtonMode;
 
@@ -83,25 +94,33 @@ export class SignInComponent {
       return;
     }
 
+    this.loadingService.show();
     const { email, password } = this.formGroup.value;
     this.authApiService
       .signIn({
         email: email!,
         password: password!,
       })
+      .pipe(
+        finalize(() => this.loadingService.hide()),
+        takeUntilDestroyed(this.destroyRef)
+      )
       .subscribe({
         next: (response: any) => {
-          console.log(' onSubmit - response:', response);
-
-          this.router.navigateByUrl(AppRoutingConstant.DASHBOARD_PROJECT);
+          const redirectUrl = this.route.snapshot.queryParamMap.get(
+            QueryParamsConstant.REDIRECT_URL
+          );
+          this.router.navigateByUrl(
+            redirectUrl || AppRoutingConstant.DASHBOARD_PROJECT
+          );
           this.authStore.setProfile(response);
         },
         error: (error: Error) => {
           console.error('Sign-in failed:', error);
           this.messageService.add({
-            severity: 'info',
-            summary: 'Info',
-            detail: 'Message Content',
+            severity: 'error',
+            summary: 'Sign-in failed',
+            detail: 'Please check your credentials and try again.',
             life: 3000,
           });
         },

@@ -1,2 +1,36 @@
 @use "tailwindcss" as *;
 @plugin "tailwindcss-primeui";
+
+@theme {
+  /* Primary palette */
+  --color-primary-50: #f0faff;
+  --color-primary-100: #e0f4fe;
+  --color-primary-200: #b9eafe;
+  --color-primary-300: #7bdcfe;
+  --color-primary-400: #35cafb;
+  --color-primary-500: #0aa7db;
+  --color-primary-600: #0091ca;
+  --color-primary-700: #0174a3;
+  --color-primary: #0aa7db; /* default */
+
+  /* Secondary palette */
+  --color-secondary-50: #faf6fe;
+  --color-secondary-100: #f4ebfc;
+  --color-secondary-200: #ebdafa;
+  --color-secondary-300: #dbbcf6;
+  --color-secondary-400: #c492ee;
+  --color-secondary-500: #ae6e84;
+  --color-secondary-600: #9b4cdd;
+  --color-secondary-700: #8336ba;
+  --color-secondary: #9b4cd6;
+
+  /* Neutral palette */
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #eeeeee;
+  --color-neutral-300: #e1e1e1;
+  --color-neutral-400: #cacaca;
+  --color-neutral-500: #8e8e8e;
+  --color-neutral-600: #4b4b4b;
+  --color-neutral-700: #2c2b31;
+}

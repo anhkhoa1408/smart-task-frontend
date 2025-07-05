@@ -13,6 +13,7 @@ import { providePrimeNG } from 'primeng/config';
 import { routes } from './app.routes';
 import AppPreset from './providers/AppPreset';
 import { MessageService } from 'primeng/api';
+import { LoadingService } from './core/services/loading.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -28,11 +29,12 @@ export const appConfig: ApplicationConfig = {
           darkModeSelector: '.fake-dark-selector',
           cssLayer: {
             name: 'primeng',
-            order: 'theme, base, primeng',
+            order: 'theme, base, primeng, utilities',
           },
         },
       },
     }),
     MessageService,
+    LoadingService,
   ],
 };

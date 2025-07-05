@@ -7,9 +7,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   imports: [],
   template: `
     <div class="flex items-center gap-[6px] py-5 px-3">
-      <img src="/logo/logo.png" class="size-[32px]" />
-      <p class="text-xl font-semibold">
-        <span class="text-primary">Smart </span>
+      <img src="/logo/logo.svg" class="size-[32px]" />
+      <p class="text-xl font-semibold flex items-center gap-1">
+        <span class="text-primary">Smart</span>
         <span class="text-secondary">Task</span>
       </p>
     </div>

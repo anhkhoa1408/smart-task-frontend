@@ -63,8 +63,8 @@ import { AppRoutingConstant } from '../../../core/constants/app-routing.constant
                   .p-panelmenu-header-content
                   > .nav-group.active
               ) {
-              color: var(--primary-color);
-              background: var(--primary-50);
+              color: var(--color-primary);
+              background: var(--color-primary-50);
               position: relative;
 
               &::after {
@@ -75,7 +75,7 @@ import { AppRoutingConstant } from '../../../core/constants/app-routing.constant
                 height: 100%;
                 top: 0;
                 right: 0;
-                background: var(--primary-color);
+                background: var(--color-primary);
               }
 
               fa-icon.toggle {
@@ -95,7 +95,7 @@ import { AppRoutingConstant } from '../../../core/constants/app-routing.constant
 
                 .p-panelmenu-item-content {
                   .nav-link.active {
-                    color: var(--primary-color);
+                    color: var(--color-primary);
                   }
                 }
               }

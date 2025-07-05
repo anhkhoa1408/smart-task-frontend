@@ -1,21 +1,30 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   FormBuilder,
   FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
+import { finalize } from 'rxjs/internal/operators/finalize';
 import { AuthApiService } from '../../../api/services/auth-api.service';
 import {
   ButtonFlatComponent,
   EButtonMode,
 } from '../../../atoms/button-flat/button-flat.component';
 import { InputComponent } from '../../../atoms/input/input.component';
-import { passwordMatchingValidator } from './_validators/password-matching.validator';
-import { MessageService } from 'primeng/api';
 import { AppRoutingConstant } from '../../../core/constants/app-routing.constants';
+import { LoadingService } from '../../../core/services/loading.service';
+import { passwordMatchingValidator } from './_validators/password-matching.validator';
 
 @Component({
   selector: 'app-sign-up',
@@ -58,9 +67,12 @@ import { AppRoutingConstant } from '../../../core/constants/app-routing.constant
   `,
 })
 export class SignUpComponent {
+  private readonly loadingService = inject(LoadingService);
+  private readonly router = inject(Router);
   private readonly formBuilder = inject(FormBuilder);
   private readonly authApiService = inject(AuthApiService);
   private readonly messageService = inject(MessageService);
+  private readonly destroyRef = inject(DestroyRef);
 
   public readonly EButtonMode = EButtonMode;
 
@@ -89,6 +101,7 @@ export class SignUpComponent {
       return;
     }
 
+    this.loadingService.show();
     const { name, email, password } = this.formGroup.value;
     this.authApiService
       .signUp({
@@ -96,16 +109,26 @@ export class SignUpComponent {
         email: email!,
         password: password!,
       })
+      .pipe(
+        finalize(() => this.loadingService.hide()),
+        takeUntilDestroyed(this.destroyRef)
+      )
       .subscribe({
         next: () => {
-          // this.router.navigateByUrl(AppRoutingConstant.SIGN_IN);
+          this.router.navigateByUrl(AppRoutingConstant.SIGN_IN);
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Sign-up successful',
+            detail: 'You have successfully registered.',
+            life: 3000,
+          });
         },
         error: (error: Error) => {
-          console.error('Sign-in failed:', error);
+          console.error('Sign-up failed:', error);
           this.messageService.add({
-            severity: 'info',
-            summary: 'Info',
-            detail: 'Message Content',
+            severity: 'error',
+            summary: 'Sign-up failed',
+            detail: 'Please check your information and try again.',
             life: 3000,
           });
         },
